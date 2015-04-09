@@ -1,0 +1,9 @@
+lib/prolog.coffee
+lib/src/game_controller.coffee
+lib/src/touchable_area.coffee
+lib/src/touchable_button.coffee
+lib/src/touchable_circle.coffee
+lib/src/touchable_direction.coffee
+lib/src/touchable_joystick.coffee
+lib/src/game_controller_plugin.coffee
+lib/boot.coffee

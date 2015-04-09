@@ -1,0 +1,24 @@
+{
+  "name": "phaser-game-controller-plugin",
+  "version": "0.0.1",
+  "authors": [
+    "darkoverlordofdata@gmail.com"
+  ],
+  "description": "Game Controller Plugin for Phaser",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "tmp",
+    "build",
+    "node_modules",
+    "packages",
+    "web/packages",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+  },
+  "packages": {
+  }
+}
