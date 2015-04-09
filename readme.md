@@ -101,7 +101,10 @@ Or
 
 @con.right.down
 ```
+## Example
+![CocoonJS](assets/device-2015-04-09-114753.png)
 
+[Asteroids in CocoonJS](https://github.com/darkoverlordofdata/asteroids)
 
 # MIT License
 
