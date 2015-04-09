@@ -105,6 +105,20 @@ Or
 ![CocoonJS](assets/device-2015-04-09-114753.png)
 
 [Asteroids in CocoonJS](https://github.com/darkoverlordofdata/asteroids)
+```coffee
+
+    @controller = @game.plugins.add(Phaser.Plugin.GameControllerPlugin, force: true)
+
+    @controller.addDPad 'left', 60, @height-60,
+      up: width: '7%', height: '7%'
+      down: false
+      left: width: '7%', height: '7%'
+      right: width: '7%', height: '7%'
+
+    @controller.addButtons 'right', @width-180, @height-80,
+      1: title: 'warp', color: 'yellow'
+      3: title: 'FIRE', color: 'red'
+```
 
 # MIT License
 
