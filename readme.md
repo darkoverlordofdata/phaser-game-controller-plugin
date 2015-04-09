@@ -29,9 +29,19 @@ Adapted as a plugin for phaser
 
 ## example usages
 
+You can choose 1 of 3 types for each of 2 sides (left & right).
+
+For example:
+
+    2 joysticks
+    2 dpads
+    2 buttton sets
+    1 left joystick + 1 right button set
+    etc...
+
+
+
 ```coffee
-
-
 @con = @game.plugins.add(Phaser.Plugin.GameControllerPlugin)
 
 @con.addDPad 'left', 60, @height-60,
@@ -73,13 +83,23 @@ Adapted as a plugin for phaser
 
 
 ```
-```coffee
-@con.joystick
-@con.dpad
-@con.buttons
+Access as
 
-@con.left
-@con.right
+
+```coffee
+@con.joystick.currentX
+
+@con.dpad.left
+
+@con.buttons.fire
+
+```
+Or
+
+```coffee
+@con.left.up
+
+@con.right.down
 ```
 
 
