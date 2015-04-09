@@ -1,59 +1,85 @@
 
-     ______               __     __
-    /_  __/__ __ _  ___  / /__ _/ /____
-     / / / -_)  ' \/ _ \/ / _ `/ __/ -_)
-    /_/  \__/_/_/_/ .__/_/\_,_/\__/\__/
-              ___/_/    ______
-             / ___/__  / _/ _/__ ___
-           _/ /__/ _ \/ _/ _/ -_) -_)
-          (_)___/\___/_//_/ \__/\__/
+               __
+         ___  / /  ___ ____ ___ ____
+        / _ \/ _ \/ _ `(_-</ -_) __/
+       / .__/_//_/\_,_/___/\__/_/
+      /_/__ ____ ___ _  ___
+       / _ `/ _ `/  ' \/ -_)
+       \_, /\_,_/_/_/_/\__/        ____
+      /___/___  ___  / /________  / / /__ ____
+      / __/ _ \/ _ \/ __/ __/ _ \/ / / -_) __/
+      \__/\___/_//_/\__/_/ _\___/_/_/\__/_/
+         ___  / /_ _____ _(_)__
+        / _ \/ / // / _ `/ / _ \
+       / .__/_/\_,_/\_, /_/_//_/
+      /_/          /___/
 
 
 
-
-#Template.coffee
-
-Coffeescript project template
+#phaser-game-controller-plugin
 
 
- Tasks:
+Based on Html5 Virtual Game Controller
 
-* test  - run tests
-* zip   - create build/{{project}}.zip and copy to device
-
-* build - build sources to web/packages/{{lib}} & web/packages/example
-            if lib/filelist is found, use that to concat files.
-            otherwise, let browserify sort it out.
-* get   - gets package dependencies using bower
-* deps  - list dependencies
-* gh    - publish gh-pages
+@see https://github.com/austinhallock/html5-virtual-game-controller
 
 
-        project
-        | -- bin                    tools
-        | -- build                  output folder for zip
-        | -- example                example using the lib
-        | -- lib                    defines this package
-        | -- node_modules           npm dependencies
-        | -- packages               bower external packages
-        | -- (tmp)                  temporary
-        | -- web                    source
-        |     | -- index.html
-        |     | -- main.js          starts lib.main()
-        |     + -- packages         packages + lib
-        |           | -- {{lib}}
-        |           | -- example
-        |           | -- other...
-        |
-        | -- .bowerrc               define ./packages
-        | -- .gitignore             build, node_modules, tmp, packages
-        | -- bower.json             module name, packages
-        | -- Gruntfile.coffee       this workflow
-        | -- license.md
-        | -- package.json           output package name
-        + -- readme.md
+Adapted as a plugin for phaser
 
 
+## example usages
+
+```coffee
+@con.joystick
+@con.dpad
+@con.buttons
+
+@con.left
+@con.right
+```
+```coffee
+
+
+@con = @game.plugins.add(Phaser.Plugin.GameconPlugin)
+
+@con.addDPad 'left', 60, @height-60,
+up: width: '7%', height: '7%'
+down: false
+left: width: '7%', height: '7%'
+right: width: '7%', height: '7%'
+
+@con.addDPad
+left: 60, @height-60,
+up: width: '7%', height: '7%'
+down: false
+left: width: '7%', height: '7%'
+right: width: '7%', height: '7%'
+right: @width-60, @height-60,
+up: width: '7%', height: '7%'
+down: false
+left: width: '7%', height: '7%'
+right: width: '7%', height: '7%'
+
+@con.addButtons 'right', @width-180, @height-80,
+1: title: 'WARP', color: 'yellow'
+3: title: 'FIRE', color: 'red'
+
+@con.addButtons
+left: 180, @height-80,
+1: title: 'WARP', color: 'yellow'
+3: title: 'FIRE', color: 'red'
+right: @width-180, @height-80,
+1: title: 'WARP', color: 'yellow'
+3: title: 'FIRE', color: 'red'
+
+
+@con.addJoystick 'left', 60, @height-60
+@con.addJoystick
+left: x: 60, y: @height-60
+right: x: @width-60, y: @height-60
+
+
+```
 
 
 # MIT License
