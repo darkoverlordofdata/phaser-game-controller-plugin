@@ -78,6 +78,16 @@ module.exports = ->
         src: "#{$packageName}.coffee"
         dest: "web/packages/#{$packageName}/"
         ext: ".js"
+      alt2:
+        options:
+          bare: false
+          sourceMap: true
+        expand: true
+        flatten: false
+        cwd: "#{__dirname}/tmp"
+        src: "example.coffee"
+        dest: "web/packages/example/"
+        ext: ".js"
       std:
         options:
           bare: true
@@ -97,6 +107,11 @@ module.exports = ->
         cwd: __dirname
         src: String($fs.readFileSync('lib/filelist')).split('\n')
         dest: "tmp/#{$packageName}.coffee"
+
+      build2:
+        cwd: __dirname
+        src: String($fs.readFileSync('example/filelist')).split('\n')
+        dest: "tmp/example.coffee"
     ###
      * Package up tmp
     ###
@@ -217,7 +232,7 @@ module.exports = ->
   if $useFilelist
     @registerTask 'build', ['clean','coffee:std', 'browserify', 'uglify', 'copy:res', 'copy:build']
   else
-    @registerTask 'build', ['clean', 'concat:build', 'coffee:alt', 'uglify', 'copy:res', 'copy:build']
+    @registerTask 'build', ['clean', 'concat:build', 'concat:build2', 'coffee:alt', 'coffee:alt2', 'uglify', 'copy:res', 'copy:build']
   @registerTask 'get', 'bowercopy'
   @registerTask 'gh', 'shell:gh'
   @registerTask 'deps', ->

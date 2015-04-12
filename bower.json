@@ -18,7 +18,13 @@
     "tests"
   ],
   "dependencies": {
+    "stats.js": "*",
+    "ash": "git://github.com/darkoverlordofdata/ash.coffee",
+    "phaser": "*"
   },
   "packages": {
+    "stats.js": "stats.js/build/*.js",
+    "ash": "ash/dist/*.*",
+    "phaser": "phaser/build/phaser.*"
   }
 }
