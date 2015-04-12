@@ -1,8 +1,6 @@
 example/prolog.coffee
 example/src/PerfMonPlugin.coffee
 example/src/Demo.coffee
-example/src/systems/SystemPriorities.coffee
 example/src/systems/CollectorSystem.coffee
 example/src/systems/CollisionSystem.coffee
 example/src/systems/PlayerMovementSystem.coffee
-example/boot.coffee

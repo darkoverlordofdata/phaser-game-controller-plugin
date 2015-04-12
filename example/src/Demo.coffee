@@ -54,17 +54,14 @@ class Demo
   cursors         : null  # player controller
   score           : 0
 
-  ###
-   * Create the phaser game component
-  ###
   constructor: () ->
     @game = new Phaser.Game(@width * @scale, @height * @scale, Phaser.CANVAS, '',
       init: @init, preload: @preload, create: @create)
 
 
-  ###
-   * Configure Phaser scaling
-  ###
+  ### ============================================================>
+      set phaser scaling
+  <============================================================ ###
   init: =>
     @game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL
     @game.scale.minWidth = @width * @scale
@@ -75,19 +72,19 @@ class Demo
     @game.scale.pageAlignHorizontally = true
     return
 
-  ###
-   * Preload the assets
-  ###
+  ### ============================================================>
+      Preload assets
+  <============================================================ ###
   preload: =>
     @game.load.image 'sky', 'assets/sky.png'
     @game.load.image 'ground', 'assets/platform.png'
     @game.load.image 'star', 'assets/star.png'
     @game.load.spritesheet 'dude', 'assets/dude.png', 32, 48
+    return
 
-
-  ###
-   * Create ces
-  ###
+  ### ============================================================>
+      Create the game
+  <============================================================ ###
   create: =>
 
     game = @game
@@ -105,17 +102,17 @@ class Demo
     @createLedge('ground', 400, 400)
     @createLedge('ground', -150, 250)
     @createStars('star', 70, 0, 12, 10)
-    @createPlayer('dude', 150, 350, cursors)
+    @createPlayer('dude', 150, 350)
     @createScore(16, 16, 'score: 0', fontSize: '32px', fill: '#000')
 
     @ash.addSystem(new CollisionSystem(this), SYSTEM_RESOLVE_COLLISIONS)
     @ash.addSystem(new PlayerMovementSystem(this), SYSTEM_MOVE)
     @ash.addSystem(new CollectorSystem(this), SYSTEM_UPDATE)
+    return
 
-
-  ###
-   * Create a background
-  ###
+  ### ============================================================>
+      Create a background
+  <============================================================ ###
   createBackground: (key) ->
 
     # phaser sprite
@@ -128,9 +125,9 @@ class Demo
     @ash.addEntity(sky)
     return
 
-  ###
-   * Create the ground
-  ###
+  ### ============================================================>
+      Create the ground
+  <============================================================ ###
   createGround: (key) ->
 
     # phaser sprite
@@ -144,9 +141,9 @@ class Demo
     @ash.addEntity(ground)
     return
 
-  ###
-   * Create a ledge
-  ###
+  ### ============================================================>
+      Create a ledge
+  <============================================================ ###
   createLedge: (key, x, y) ->
 
     # phaser sprite
@@ -159,10 +156,10 @@ class Demo
     @ash.addEntity(ledge)
     return
 
-  ###
-   * Create the player
-  ###
-  createPlayer: (key, velocityHorz, velocityVert, cursors) ->
+  ### ============================================================>
+      Create the player
+  <============================================================ ###
+  createPlayer: (key, velocityHorz, velocityVert) ->
 
     # phaser sprite
     sprite = @game.add.sprite(32, @game.world.height - 150, key)
@@ -177,13 +174,13 @@ class Demo
     player = new ash.core.Entity().add(sprite)
     .add(new Components.Collision(sprite, @platforms))
     .add(new Components.Collector(sprite, @stars, @scoreListener))
-    .add(new Components.Player(sprite, 4, velocityHorz, velocityVert, cursors))
+    .add(new Components.Player(sprite, 4, velocityHorz, velocityVert, @cursors))
     @ash.addEntity(player)
     return
 
-  ###
-   * Create the score
-  ###
+  ### ============================================================>
+      Create the score
+  <============================================================ ###
   createScore: (x, y, text, style) ->
     sprite = @game.add.text(x, y, text, style)
 
@@ -196,9 +193,9 @@ class Demo
     return
 
 
-  ###
-   * Create the stars
-  ###
+  ### ============================================================>
+      Create stars
+  <============================================================ ###
   createStars: (key, x, y, count, points) ->
 
     # phaser group
