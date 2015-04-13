@@ -26,8 +26,18 @@ Based on Html5 Virtual Game Controller
 
 Adapted as a plugin for phaser
 
+## Build
 
-## example usages
+```bash
+$ git clone https://github.com/darkoverlordofdata/phaser-game-controller-plugin
+$ cd phaser-game-controller-plugin
+$ npm install
+$ grunt get
+$ grunt build
+```
+Then point your browser at ./web/index.html
+
+## Usage
 
 You can choose 1 of 3 types for each of 2 sides (left & right).
 

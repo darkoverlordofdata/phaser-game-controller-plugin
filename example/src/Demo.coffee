@@ -16,8 +16,9 @@ Components = do ->
     stand         : 0
     velocityHorz  : 0
     velocityVert  : 0
-    cursors        : null
-    constructor: (@sprite, @stand, @velocityHorz, @velocityVert, @cursors) ->
+    cursors       : null
+    controller    : null
+    constructor: (@sprite, @stand, @velocityHorz, @velocityVert, @cursors, @controller) ->
 #
 # Ash Nodes
 #
@@ -55,7 +56,7 @@ class Demo
   score           : 0
 
   constructor: () ->
-    @game = new Phaser.Game(@width * @scale, @height * @scale, Phaser.CANVAS, '',
+    @game = new Phaser.Game(800, 600, Phaser.CANVAS, '',
       init: @init, preload: @preload, create: @create)
 
 
@@ -64,12 +65,6 @@ class Demo
   <============================================================ ###
   init: =>
     @game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL
-    @game.scale.minWidth = @width * @scale
-    @game.scale.minHeight = @height * @scale
-    @game.scale.maxWidth = @width * @scale
-    @game.scale.maxHeight = @height * @scale
-    @game.scale.pageAlignVertically = true
-    @game.scale.pageAlignHorizontally = true
     return
 
   ### ============================================================>
@@ -96,6 +91,7 @@ class Demo
 
     @profiler = game.plugins.add(Phaser.Plugin.PerfMonPlugin, x:720)
     @ash = game.plugins.add(ash.ext.PhaserPlugin, Nodes, Components)
+    @controller = @game.plugins.add(Phaser.Plugin.GameControllerPlugin, force: true)
 
     @createBackground('sky')
     @createGround('ground')
@@ -108,7 +104,10 @@ class Demo
     @ash.addSystem(new CollisionSystem(this), SYSTEM_RESOLVE_COLLISIONS)
     @ash.addSystem(new PlayerMovementSystem(this), SYSTEM_MOVE)
     @ash.addSystem(new CollectorSystem(this), SYSTEM_UPDATE)
+
+    @controller.start()
     return
+
 
   ### ============================================================>
       Create a background
@@ -174,7 +173,7 @@ class Demo
     player = new ash.core.Entity().add(sprite)
     .add(new Components.Collision(sprite, @platforms))
     .add(new Components.Collector(sprite, @stars, @scoreListener))
-    .add(new Components.Player(sprite, 4, velocityHorz, velocityVert, @cursors))
+    .add(new Components.Player(sprite, 4, velocityHorz, velocityVert, @cursors, @controller))
     @ash.addEntity(player)
     return
 

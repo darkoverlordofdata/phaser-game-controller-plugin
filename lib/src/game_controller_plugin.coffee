@@ -35,13 +35,53 @@ class Phaser.Plugin.GameControllerPlugin extends Phaser.Plugin
       ###
       document.documentElement['ontouchstart'] = ->
 
-
   ###
    * Start
   ###
   start: () ->
 #    if @game.device.mobile
     if 'ontouchstart' of document.documentElement
+      if not @options.left?
+        position = GameController.options.left.position
+        @options.left =
+          position: left: position.left, bottom: position.bottom
+          type: 'dpad'
+          dpad: {}
+        @dpad =
+          up: false
+          down: false
+          left: false
+          right: false
+        for direction in ['up','down', 'left','right']
+          do (direction) => # create a closure for each set of options
+            @options.left.dpad[direction] =
+              touchStart: =>
+                @dpad[direction] = true
+                return
+              touchEnd: =>
+                @dpad[direction] = false
+                return
+      if not @options.right?
+        position = GameController.options.right.position
+        @options.right =
+          position: right: position.right, bottom: position.bottom
+          type: 'buttons'
+          buttons: [false, false, false, false]
+        @buttons =
+          x: false
+          y: false
+          b: false
+          a: false
+        for title, index in ['x','y','b','a']
+          do (title) => # create a closure for each set of options
+            @options.right.buttons[index] =
+              touchStart: =>
+                @buttons[title] = true
+                return
+              touchEnd: =>
+                @buttons[title] = false
+                return
+
       GameController.init(@game, @options)
     return
 
