@@ -1,3 +1,8 @@
+###
+  This is the original non-ash version of the tutorial
+  its about 150 lines, where the ash version comes out a
+  little over 300 lines...
+###
 class Demo
 
   height      : window.innerHeight
